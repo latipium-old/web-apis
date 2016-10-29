@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Latipium.Website.Apis", "Com.Latipium.Website.Apis.csproj", "{8500B6CA-57A3-44A1-A09A-62104EDCFD0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		AddMigration|Any CPU = AddMigration|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8500B6CA-57A3-44A1-A09A-62104EDCFD0F}.AddMigration|Any CPU.ActiveCfg = AddMigration|Any CPU
+		{8500B6CA-57A3-44A1-A09A-62104EDCFD0F}.AddMigration|Any CPU.Build.0 = AddMigration|Any CPU
+		{8500B6CA-57A3-44A1-A09A-62104EDCFD0F}.Debug|x86.ActiveCfg = Debug|x86
+		{8500B6CA-57A3-44A1-A09A-62104EDCFD0F}.Debug|x86.Build.0 = Debug|x86
+		{8500B6CA-57A3-44A1-A09A-62104EDCFD0F}.Release|x86.ActiveCfg = Release|x86
+		{8500B6CA-57A3-44A1-A09A-62104EDCFD0F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,0 @@
----
-layout: none
-permalink: /start/game/all-posts.json
-type: start
----
-{% include posttype.json %}

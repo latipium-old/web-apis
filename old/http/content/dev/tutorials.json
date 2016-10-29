@@ -1,6 +1,0 @@
----
-layout: none
-permalink: /tutorials/dev/all-posts.json
-type: tutorials-dev
----
-{% include posttype.json %}
