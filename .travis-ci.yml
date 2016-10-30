@@ -1,0 +1,6 @@
+language: csharp
+solution: Com.Latipium.Website.Apis.sln
+install:
+- nuget restore
+mono:
+- latest
