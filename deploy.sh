@@ -46,5 +46,8 @@ cd target
 git push origin-ssh master
 cd ..
 
+# Trigger the GitLab CI
+curl -X POST -F token=$GITLAB_TOKEN -F ref=master https://gitlab.com/api/v3/projects/1962153/trigger/builds
+
 # Finished
 echo "Deploy successful."
