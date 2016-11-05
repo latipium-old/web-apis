@@ -4,3 +4,6 @@ install:
 - nuget restore
 mono:
 - latest
+cache:
+  directories:
+    - packages/
