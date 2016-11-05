@@ -4,6 +4,10 @@ install:
 - nuget restore
 mono:
 - latest
+deploy:
+  provider: script
+  script: ./deploy.sh
+  skip_cleanup: true
 cache:
   directories:
     - packages/
