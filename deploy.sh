@@ -10,14 +10,14 @@ fi
 # Set up directories
 cat <<exit | sshpass -fpass ssh -F config deployserver
 cd /var/lib/fusionforge/chroot/home/groups/latipium/
-if [ -d htdocs.new ]; then
-    rm -rf htdocs.new
+if [ -d src ]; then
+    rm -rf src
 fi
-mkdir htdocs.new
+mkdir src
 exit
 
 # Upload the code
-sshpass -fpass scp -r src/* -F config deployserver:/var/lib/fusionforge/chroot/home/groups/latipium/htdocs.new/
+tar c src/* | sshpass -fpass ssh -F config deployserver "tar xC /var/lib/fusionforge/chroot/home/groups/latipium/"
 
 # Swap code versions
 cat <<exit | sshpass -fpass ssh -F config deployserver
@@ -26,7 +26,7 @@ if [ -d htdocs.old ]; then
     rm -rf htdocs.old
 fi
 mv htdocs htdocs.old
-mv htdocs.new htdocs
+mv src htdocs
 rm -rf htdocs.old
 exit
 
