@@ -7,47 +7,28 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_BRANCH" != "master" ]; th
 	exit 0
 fi
 
-# Clone the deploy repo
-COMMIT_AUTHOR_NAME="$(git show -s --format="%aN" master)"
-COMMIT_AUTHOR_EMAIL="$(git show -s --format="%aE" master)"
-COMMIT_MESSAGE="$(git show -s --format="%s" master)"
-if [ ! -d target ]; then
-	git clone https://github.com/latipium/web-apis-artifacts.git target
-	cd target
-	git remote add origin-ssh git@github.com:latipium/web-apis-artifacts.git
-else
-	cd target
-	git pull origin master
+# Set up directories
+cat <<exit | sshpass -fpass ssh -F config deployserver
+cd /var/lib/fusionforge/chroot/home/groups/latipium/
+if [ -d htdocs.new ]; then
+    rm -rf htdocs.new
 fi
-git config user.name "$COMMIT_AUTHOR_NAME"
-git config user.email "$COMMIT_AUTHOR_EMAIL"
-cd ..
+mkdir htdocs.new
+exit
 
-# Delete old files
-rm -rf target/*
+# Upload the code
+sshpass -fpass scp -r src/* -F config deployserver:/var/lib/fusionforge/chroot/home/groups/latipium/htdocs.new/
 
-# Copy built files
-cp -r bin/Release/* target
-
-# Commit new changes
-cd target
-git add --all
-git commit -m "$COMMIT_MESSAGE"
-cd ..
-
-# Decrypt the deploy key
-openssl aes-256-cbc -K $encrypted_2b1182de72ea_key -iv $encrypted_2b1182de72ea_iv -in deploy_key.enc -out deploy_key -d
-chmod 600 deploy_key
-eval $(ssh-agent -s)
-ssh-add deploy_key
-
-# Push to the deploy repo
-cd target
-git push origin-ssh master
-cd ..
-
-# Trigger the GitLab CI
-curl -X POST -F token=$GITLAB_TOKEN -F ref=master https://gitlab.com/api/v3/projects/1962153/trigger/builds
+# Swap code versions
+cat <<exit | sshpass -fpass ssh -F config deployserver
+cd /var/lib/fusionforge/chroot/home/groups/latipium/
+if [ -d htdocs.old ]; then
+    rm -rf htdocs.old
+fi
+mv htdocs htdocs.old
+mv htdocs.new htdocs
+rm -rf htdocs.old
+exit
 
 # Finished
 echo "Deploy successful."

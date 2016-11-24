@@ -1,5 +1,2 @@
-/bin/
-/obj/
-/packages/
-*.userprefs
-/deploy_key
+/config
+/pass
