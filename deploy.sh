@@ -25,11 +25,11 @@ cd /var/lib/fusionforge/chroot/home/groups/latipium/
 if [ -d htdocs.old ]; then
     rm -rf htdocs.old
 fi
+chmod 640 \$(find src -type f)
+chmod 750 \$(find src -type d)
 mv htdocs htdocs.old
 mv src htdocs
 rm -rf htdocs.old
-chmod 640 $(find htdocs -type f)
-chmod 750 $(find htdocs -type d)
 exit
 
 # Finished
