@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^/?v([0-9]+)/([a-z]+)$ /pages/v$1/$2.php [END]
+RewriteRule ^(.*)$ https://latipium.com/ [R]

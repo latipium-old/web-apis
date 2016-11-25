@@ -6,3 +6,6 @@
 !/sensitive.tar.enc
 !/src/
 !/.travis.yml
+/src/vendor/
+/src/include/secrets.json
+/src/include/dev-config.php
