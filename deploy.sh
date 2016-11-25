@@ -28,6 +28,8 @@ fi
 mv htdocs htdocs.old
 mv src htdocs
 rm -rf htdocs.old
+chmod 640 $(find htdocs -type f)
+chmod 750 $(find htdocs -type d)
 exit
 
 # Finished
