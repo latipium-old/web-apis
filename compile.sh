@@ -2,7 +2,7 @@
 set -e
 
 # Install composer
-curl -0 composer-setup.php https://getcomposer.org/installer
+curl -o composer-setup.php https://getcomposer.org/installer
 if [ "$(sha384sum composer-setup.php | cut -d" " -f1)" != "$(curl https://composer.github.io/installer.sig)" ]; then
     echo "Invalid signature"
     exit 1
