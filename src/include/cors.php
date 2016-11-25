@@ -1,7 +1,7 @@
 <?php
     if ( isset($_SERVER["HTTP_REFERER"]) ) {
         $host = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST);
-        if ( $host != "accounts.google.com" && $host != "latipium.com" ) {
+        if ( $host != "accounts.google.com" && $host != "latipium.com" && $host != "www.latipium.com" && $host != "localhost" ) {
             header("Location: https://latipium.com/");
             exit();
         }
