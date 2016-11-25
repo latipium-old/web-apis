@@ -17,7 +17,7 @@ mkdir src
 exit
 
 # Upload the code
-tar c src/* | sshpass -fpass ssh -F config deployserver "tar xC /var/lib/fusionforge/chroot/home/groups/latipium/"
+tar c $(find src -type f) | sshpass -fpass ssh -F config deployserver "tar xC /var/lib/fusionforge/chroot/home/groups/latipium/"
 
 # Swap code versions
 cat <<exit | sshpass -fpass ssh -F config deployserver
