@@ -34,8 +34,8 @@
                 self::$client->authenticate($_GET["code"]);
                 $_SESSION["accessToken"] = self::$client->getAccessToken();
                 if ( isset($_SESSION["returnUri"]) && $_SESSION["returnUri"] ) {
-                    unset($_SESSION["returnUri"]);
                     header("Location: " . $_SESSION["returnUri"]);
+                    unset($_SESSION["returnUri"]);
                     exit();
                 }
             }
