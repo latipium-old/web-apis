@@ -9,8 +9,7 @@
     if ( isset($_SERVER["HTTP_ORIGIN"]) ) {
         $host = parse_url($_SERVER["HTTP_ORIGIN"], PHP_URL_HOST);
         if ( $host == "latipium.com" || $host == "www.latipium.com" || $host == "localhost" ) {
-            $port = parse_url($_SERVER["HTTP_ORIGIN"], PHP_URL_PORT);
-            header("Access-Control-Allow-Origin: " . $host . ($port == "" ? "" : ":" . $port));
+            header("Access-Control-Allow-Origin: " . $_SERVER["HTTP_ORIGIN"]);
         } else {
             header("Location: https://latipium.com/");
             exit();
