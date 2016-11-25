@@ -9,7 +9,7 @@
     if ( isset($_SERVER["HTTP_ORIGIN"]) ) {
         $host = parse_url($_SERVER["HTTP_ORIGIN"], PHP_URL_HOST);
         if ( $host == "latipium.com" || $host == "www.latipium.com" || $host == "localhost" ) {
-            header("Access-Control-Allow-Origin: latipium.com");
+            header("Access-Control-Allow-Origin: " . $host);
         } else {
             header("Location: https://latipium.com/");
             exit();
@@ -22,4 +22,5 @@
         header("Access-Control-Allow-Headers: " . $_SERVER["HTTP_ACCESS_CONTROL_REQUEST_HEADERS"]);
     }
     header("Access-Control-Max-Age: 600");
+    header("Access-Control-Allow-Credentials: true");
 ?>
