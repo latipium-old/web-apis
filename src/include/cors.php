@@ -1,7 +1,10 @@
 <?php
-    if ( isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] != "latipium.com" ) {
-        header("Location: https://latipium.com/");
-        exit();
+    if ( isset($_SERVER["HTTP_REFERER"]) ) {
+        $host = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST);
+        if ( $host != "accounts.google.com" && $host != "latipium.com" ) {
+            header("Location: https://latipium.com/");
+            exit();
+        }
     }
     if ( isset($_SERVER["HTTP_ORIGIN"]) ) {
         if ( $_SERVER["HTTP_ORIGIN"] == "latipium.com" ) {
