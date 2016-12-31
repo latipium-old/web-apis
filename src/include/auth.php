@@ -48,5 +48,7 @@
         }
     }
 
-    Authentication::init();
+    if ( !defined("LATIPIUM_DO_NOT_REQUIRE_AUTHENTICATION") ) {
+        Authentication::init();
+    }
 ?>
