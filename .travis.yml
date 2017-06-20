@@ -2,3 +2,7 @@ script: echo
 deploy:
   provider: script
   script: "./deploy.sh"
+addons:
+  apt:
+    packages:
+    - lftp
