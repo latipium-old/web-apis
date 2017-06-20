@@ -3,34 +3,16 @@ set -e
 
 # Only build on the master branch
 if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_BRANCH" != "master" ]; then
-	echo "Skipping deploy."
-	exit 0
+  echo "Skipping deploy."
+  exit 0
 fi
 
-# Set up directories
-cat <<exit | sshpass -fpass ssh -F config deployserver
-cd /var/lib/fusionforge/chroot/home/groups/latipium/
-if [ -d src ]; then
-    rm -rf src
-fi
-mkdir src
-exit
+# Decrypt private data
+openssl aes-256-cbc -K $encrypted_9329eebe91f4_key -iv $encrypted_9329eebe91f4_iv -in src/lib/private.php.enc -out src/lib/private.php -d
+openssl aes-256-cbc -K $encrypted_b68dbcd8babf_key -iv $encrypted_b68dbcd8babf_iv -in deploy.ftp.enc -out deploy.ftp -d
 
-# Upload the code
-tar c $(find src -type f) | sshpass -fpass ssh -F config deployserver "tar xC /var/lib/fusionforge/chroot/home/groups/latipium/"
+# Remove unneccessary files
+rm -f src/lib/{.gitignore,private.php.enc}
 
-# Swap code versions
-cat <<exit | sshpass -fpass ssh -F config deployserver
-cd /var/lib/fusionforge/chroot/home/groups/latipium/
-if [ -d htdocs.old ]; then
-    rm -rf htdocs.old
-fi
-chmod 640 \$(find src -type f)
-chmod 751 \$(find src -type d)
-mv htdocs htdocs.old
-mv src htdocs
-rm -rf htdocs.old
-exit
-
-# Finished
-echo "Deploy successful."
+# Upload sources
+lftp -f deploy.ftp

@@ -1,3 +1,12 @@
+# HTID:1644955: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:1644955:
+
 RewriteEngine On
-RewriteRule ^/?v([0-9]+)/([a-z]+)$ /pages/v$1/$2.php [END]
-RewriteRule ^(.*)$ https://latipium.com/ [R]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule (.*) /404.json [END,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule (.*) $1.php [END,L]
+RewriteRule (.*) /404.json [END,L]

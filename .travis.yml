@@ -1,13 +1,3 @@
-language: php
-script: ./compile.sh
 deploy:
   provider: script
   script: "./deploy.sh"
-  skip_cleanup: true
-addons:
-  apt:
-    packages:
-    - sshpass
-before_install:
-- openssl aes-256-cbc -K $encrypted_b68dbcd8babf_key -iv $encrypted_b68dbcd8babf_iv
-  -in sensitive.tar.enc -d | tar x
