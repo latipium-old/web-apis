@@ -5,7 +5,7 @@
     if (isset($_GET["port"])) {
         $_SESSION["port"] = $_GET["port"];
         $_SESSION["state"] = uniqid("", true);
-        header("Location: https://github.com/login/oauth/authorize?client_id=${cfg["clientId"]}&redirect_uri=https://api.latipium.com/oauth/github&scope=repo&state=${_SESSION["state"]}");
+        header("Location: https://github.com/login/oauth/authorize?client_id=${cfg["clientId"]}&redirect_uri=https://api.latipium.com/oauth/github&scope=repo read:org user:email repo_deployment repo:status public_repo write:repo_hook&state=${_SESSION["state"]}");
     } else if (isset($_GET["code"]) && isset($_GET["state"]) && isset($_SESSION["state"]) && $_GET["state"] == $_SESSION["state"]) {
         $curl = curl_init("https://github.com/login/oauth/access_token");
         curl_setopt($curl, CURLOPT_POSTFIELDS, array(
