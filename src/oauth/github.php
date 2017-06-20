@@ -22,8 +22,8 @@
         $obj = json_decode(curl_exec($curl), true);
         curl_close($curl);
         $obj["port"] = $_SESSION["port"];
-        header("Content-Type: application/json");
-        echo json_encode($obj);
+        setcookie("OAuthResponse", json_encode($obj), time() + 60, "/", ".latipium.com");
+        header("Location: https://latipium.com/oauth");
     } else {
         header("Content-Type: application/json");
         include "../404.json";
